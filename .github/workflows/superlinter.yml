@@ -1,45 +1,18 @@
-name: CI to Docker hub 
+name: CI-docker-workflow
 
 on:
-
   push:
+    branches: main
 
-    branches: [ main ]
+  workflow_dispatch:
 
-  steps:
+jobs:
+  build-container:
 
-      -
-
-        name: Login to DockerHub
-
-        uses: docker/login-action@v1 
-
-        with:
-
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      -
-
-        name: Build and push
-
-        id: docker_build
-
-        uses: docker/build-push-action@v2
-
-        with:
-
-          context: ./
-
-          file: Dockerfile
-
-          push: true
-
-          tags: ravi:v1.2
-
-      -
-
-        name: Image digest
-
-        run: echo ${{ steps.docker_build.outputs.digest }}
+    runs-on: ubuntu-latest
+    steps:
+      -uses: actions/checkout@v2
+      -name: build the Docker image
+       working-directory: /app
+       run: docker build . --file Dockerfile --tag /app:$(date +%s)
+       
