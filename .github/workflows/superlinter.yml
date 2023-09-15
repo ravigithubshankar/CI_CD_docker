@@ -1,18 +1,21 @@
 name: CI-docker-workflow
 
 on:
-  push:
-    branches: main
+    push:
+        branches: main
 
-  workflow_dispatch:
+    workflow_dispatch:
 
 jobs:
-  build-container:
+    build-container:
 
-    runs-on: ubuntu-latest
-    steps:
-      -uses: actions/checkout@v2
-      -name: build the Docker image
-       working-directory: /app
-       run: docker build . --file Dockerfile --tag /app:$(date +%s)
+        runs-on: ubuntu-latest
+        steps:
+          -uses: actions/checkout@v2
+          -name: build the Docker image
+      
+           working-directory:
+               /app
+       
+           run: docker build . --file Dockerfile --tag /app:$(date +%s)
        
