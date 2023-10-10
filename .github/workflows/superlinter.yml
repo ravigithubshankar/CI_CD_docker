@@ -1,22 +1,28 @@
-name: CI-docker-workflow
+name: CI/CD-docker-workflow
 
 on:
     push:
         branches: main
 
-    workflow_dispatch:
-
 jobs:
-    build-container:
+    build-and-test:
+        runs-on:ubuntu-latest
 
-        runs-on: ubuntu-latest
         steps:
-          -uses: actions/checkout@v2
-          -name: build the Docker image
-      
-           working-directory :
-           
-               /home/ravi/Documents/app
-       
-           run: docker build . --file Dockerfile --tag /app:$(date +%s)
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: set up docker
+              uses: actions/setup-python@2
+              with:
+                  python-version: '3.10.1'
+            - name: Build Docker image
+              run: docker build -t badd9204e3c8:latest
+              working-directory: /home/ravi/Desktop/mnist.py
+
+            - name: Run Docker container
+              run: docker run badd9204e3c8:latest
+              working-directory: /home/ravi/Desktop/mnist.py
+
+ 
        
