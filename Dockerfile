@@ -2,7 +2,7 @@
 FROM nvcr.io/nvidia/tensorflow:latest
 
 # Set the working directory inside the container
-WORKDIR /home/ravi/Documents/app
+WORKDIR /app
 
 # Copy the Python script and any other necessary files into the container
 COPY mnist.py .
