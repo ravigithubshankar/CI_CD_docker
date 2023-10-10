@@ -1,4 +1,4 @@
-name: CI/CD-docker-workflow
+name: Docker Build and Test
 
 on:
     push:
